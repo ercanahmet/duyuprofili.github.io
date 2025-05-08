@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import io
 from matplotlib.backends.backend_pdf import PdfPages
 import base64
+import datetime 
 
 st.set_page_config(page_title="Duyu Profili Testi", layout="wide")
 st.title("🧠 Duyu Profili Testi")
@@ -270,7 +271,11 @@ if not st.session_state.test_started:
             ad_soyad = st.text_input("Ad Soyad")
             cinsiyet = st.selectbox("Cinsiyet", ["Seçiniz", "Erkek", "Kadın"])
         with col2:
-            dogum_tarihi = st.date_input("Doğum Tarihi")
+            dogum_tarihi = st.date_input(
+                "Doğum Tarihi",
+                min_value=datetime.date(1950, 1, 1),
+                max_value=datetime.date.today()
+            )
         basla = st.form_submit_button("Teste Başla")
         if basla:
             if not ad_soyad or cinsiyet == "Seçiniz":
